@@ -67,7 +67,7 @@ const Mutation = {
         const {
             id
         } = args;
-        const userIdx = db.users.findIndex((user) => user.id === author);
+        const userIdx = db.users.findIndex((user) => user.id === id);
         if (userIdx < 0) throw Error('User not found');
         const deletedUser = db.users.splice(userIdx, 1);
         db.posts = db.posts.filter((post) => {
@@ -89,7 +89,7 @@ const Mutation = {
         const {
             id
         } = args;
-        const postIdx = db.posts.findIndex((po) => po.id === post);
+        const postIdx = db.posts.findIndex((po) => po.id === id);
         if (postIdx < 0) throw Error('Psot not found');
         const deletedPost = db.posts.splice(postIdx, 1);
         db.comments = db.comments.filter((comment) => comment.author !== id);
@@ -101,7 +101,7 @@ const Mutation = {
         const {
             id
         } = args;
-        const commentIDx = db.comments.findIndex((c) => c.id === comments);
+        const commentIDx = db.comments.findIndex((c) => c.id === id);
         if (commentIDx < 0) throw Error('Comment not found');
         const deletedComment = db.comments.splice(commentIDx, 1);
         return deletedComment[0];
