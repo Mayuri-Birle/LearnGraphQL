@@ -1,5 +1,6 @@
 import {
-	GraphQLServer
+	GraphQLServer,
+	PubSub
 } from 'graphql-yoga';
 
 import db from './db';
@@ -8,10 +9,10 @@ import Query from './resolvers/Query';
 import Post from './resolvers/Post';
 import Mutation from './resolvers/Mutation';
 import User from './resolvers/User';
-
+import Subscription from './resolvers/Subscription';
 //Scalar types = String, Boolean,float,int,ID
 
-
+const pubsub = new PubSub();
 const server = new GraphQLServer({
 	typeDefs: './src/schema.graphql',
 	resolvers: {
@@ -19,10 +20,12 @@ const server = new GraphQLServer({
 		Comment,
 		Post,
 		Query,
+		Subscription,
 		Mutation
 	},
 	context: {
-		db
+		db,
+		pubsub
 	}
 });
 
